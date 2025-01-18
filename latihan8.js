@@ -111,6 +111,8 @@ class kendaraan {
     }
     description() {
         console.log(`Kendaraan ${this.merk} model ${this.model} tahun ${this.tahun}`);
+       // document.getElementById("output").innerText =+ `Kendaraan ${this.merk} model ${this.model} tahun ${this.tahun}`;
+        
     }
 }
 
@@ -121,6 +123,7 @@ class kendaraanBensin extends kendaraan {
     }
     isiBensin(isiBensin) {
         console.log(`Mobil ${this.merk} model ${this.model} tahun ${this.tahun} kapasitas tangki ${this.kapasitasTangki} liter`);
+        //document.getElementById("output").innerText = `Mobil ${this.merk} model ${this.model} tahun ${this.tahun} kapasitas tangki ${this.kapasitasTangki} liter`;
     }
 }
 
@@ -131,6 +134,8 @@ class kendaraanListrik extends kendaraan {
     }
     isiListrik(isiListrik) {
         console.log(`Mobil ${this.merk} model ${this.model} tahun ${this.tahun} kapasitas listrik ${this.kapasitasBaterai} kWh`);
+        //document.getElementById("output").innerText = `Mobil ${this.merk} model ${this.model} tahun ${this.tahun} kapasitas listrik ${this.kapasitasBaterai} kWh`;
+
     }
 }
 
