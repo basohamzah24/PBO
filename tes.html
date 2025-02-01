@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aplikasi Pengelolaan Tugas</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background-color: #f4f4f9;
+      color: #333;
+    }
+    .container {
+      max-width: 600px;
+      margin: auto;
+      padding: 20px;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    h1 {
+      text-align: center;
+      color: #444;
+    }
+    form {
+      margin-bottom: 20px;
+    }
+    form input, form select, form button {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+    form button {
+      background-color: #28a745;
+      color: white;
+      cursor: pointer;
+    }
+    form button:hover {
+      background-color: #218838;
+    }
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+    li {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #f9f9f9;
+      padding: 10px;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      margin-bottom: 10px;
+    }
+    .priority-high { color: red; }
+    .priority-medium { color: orange; }
+    .priority-low { color: green; }
+    button.delete {
+      background: #dc3545;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      padding: 5px 10px;
+      cursor: pointer;
+    }
+    button.delete:hover {
+      background: #c82333;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Pengelolaan Tugas</h1>
+    <form id="taskForm">
+      <input type="text" id="taskName" placeholder="Nama Tugas" required>
+      <select id="taskPriority">
+        <option value="high">Tinggi</option>
+        <option value="medium">Sedang</option>
+        <option value="low">Rendah</option>
+      </select>
+      <button type="submit">Tambahkan Tugas</button>
+    </form>
+    <ul id="taskList"></ul>
+  </div>
+
+  <script>
+    // Class untuk mendefinisikan tugas
+    class Task {
+      constructor(name) {
+        this.name = name;
+      }
+
+      get description() {
+        return this.name;
+      }
+    }
+
+    // Class turunan untuk tugas dengan prioritas
+    class PriorityTask extends Task {
+      constructor(name, priority) {
+        super(name); // Memanggil constructor class induk
+        this._priority = priority; // Default prioritas
+      }
+
+      // Getter untuk prioritas
+      get priority() {
+        return this._priority;
+      }
+
+      // Setter untuk memperbarui prioritas
+      set priority(newPriority) {
+        this._priority = newPriority;
+      }
+
+      get fullDescription() {
+        return `${this.name} [Prioritas: ${this.priority}]`;
+      }
+    }
+
+    // Array untuk menyimpan tugas
+    const tasks = [];
+
+    // Fungsi untuk menambahkan tugas baru
+    function addTask(name, priority) {
+      const newTask = new PriorityTask(name, priority);
+      tasks.push(newTask);
+      renderTasks();
+    }
+
+    // Fungsi untuk menghapus tugas
+    function deleteTask(index) {
+      tasks.splice(index, 1);
+      renderTasks();
+    }
+
+    // Fungsi untuk merender daftar tugas
+    function renderTasks() {
+      const taskList = document.getElementById("taskList");
+      taskList.innerHTML = ""; // Clear existing tasks
+
+      tasks.forEach((task, index) => {
+        const li = document.createElement("li");
+        li.innerHTML = `
+          <span class="priority-${task.priority}">${task.fullDescription}</span>
+          <button class="delete" onclick="deleteTask(${index})">Hapus</button>
+        `;
+        taskList.appendChild(li);
+      });
+    }
+
+    // Event listener untuk form
+    document.getElementById("taskForm").addEventListener("submit", (e) => {
+      e.preventDefault(); // Prevent form from reloading the page
+      const taskName = document.getElementById("taskName").value;
+      const taskPriority = document.getElementById("taskPriority").value;
+
+      addTask(taskName, taskPriority);
+
+      // Reset form fields
+      document.getElementById("taskForm").reset();
+    });
+  </script>
+</body>
+</html>

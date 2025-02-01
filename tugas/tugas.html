@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manajemen Perpustakaan</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <div class="container">
+    <h1>Manajemen Perpustakaan</h1>
+    <div class="form-group">
+      <label for="Buku-title">Judul Buku</label>
+      <input type="text" id="Buku-title" placeholder="Masukkan judul buku">
+    </div>
+
+    <div class="form-group">
+      <label for="Buku-genre">Genre Buku</label>
+      <input type="text" id="Buku-genre" placeholder="Masukkan genre buku">
+    </div>
+
+    <div class="form-group">
+      <label for="Buku-status">Status Buku</label>
+      <input type="text" id="Buku-status" placeholder="Masukkan status buku">
+    </div>
+
+    <button class="tambah" onclick="addBuku()">Tambah Buku</button>
+    <button class="tampil" onclick="showBukus()">Tampilkan Buku</button>
+    
+    <table id="BukuTable">
+      <thead>
+        <tr>
+          <th>Judul Buku</th>
+          <th>Genre</th>
+          <th>Status Buku</th>
+        </tr>
+      </thead>
+      <tbody id="BukuList"></tbody>
+    </table>
+  </div>
+
+  <script src="scripts.js"></script>
+</body>
+</html>
